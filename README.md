@@ -41,11 +41,27 @@ dotnet test ./AiStackManager.sln -c Release --no-build
 
 ## Run
 
+For local development the project provides simple scripts under `scripts/` and a dev launcher.
+
+- Start the API on the locked dev port `127.0.0.1:5126`:
+
 ```bash
-dotnet run --project src/AiStackManager.Api/AiStackManager.Api.csproj
+./scripts/dev-api-run.sh
 ```
 
-To require a token for management endpoints:
+- Hermetic startup (safe default) — runs bootstrap checks and calls the management start endpoint without changing system services:
+
+```bash
+./scripts/dev-start-hermetic.sh
+```
+
+- Real startup (opt-in) — enables real command execution and will configure/start local user services (`systemctl --user`) and call `ollama`, `hermes`, `openclaw`:
+
+```bash
+./scripts/dev-start-real.sh --token <management-token>
+```
+
+To require a token for management endpoints when running manually:
 
 ```bash
 dotnet run --project src/AiStackManager.Api/AiStackManager.Api.csproj -- \

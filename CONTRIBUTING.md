@@ -20,19 +20,44 @@ dotnet test ./tests/AiStackManager.IntegrationTests -c Release
 ```
 
 Developer launcher
-- A small console helper is available at `src/aistack-dev-launcher`. It can run the API host or trigger the management start/stop endpoints:
+- A small console helper is available at `src/aistack-dev-launcher`. It can run the API host or trigger the management start/stop endpoints.
+
+Developer scripts
+- Use the convenience scripts under `scripts/` for a predictable local dev workflow. The API development host binds to `127.0.0.1:5126` to avoid port confusion.
+
+Hermetic (default) startup
+- Start the API on the locked dev port:
 
 ```bash
-dotnet run --project src/aistack-dev-launcher -- api --urls http://localhost:5000
-dotnet run --project src/aistack-dev-launcher -- start --token <token>
-dotnet run --project src/aistack-dev-launcher -- stop --token <token>
+./scripts/dev-api-run.sh
 ```
+
+- Run the hermetic bootstrap + start (no system changes, safe):
+
+```bash
+./scripts/dev-start-hermetic.sh
+```
+
+Real startup (opt-in)
+- To enable real system commands and perform actual `ollama`, `hermes`, and `openclaw` operations, use:
+
+```bash
+./scripts/dev-start-real.sh --token <management-token>
+```
+
+- Real startup sets `AISTACK_RUN_REAL_COMMANDS=true` and will call user-level services via `systemctl --user` (no interactive sudo required).
 
 Notes
 - Do not commit secrets. `AiStack:ManagementToken` should be set via environment variables or secret store in CI.
 - Prefer adding providers as separate packages; implement `IInferenceProvider` and register via the Autofac module.
 
+- [ ] Add/update tests for new behavior.
+- [ ] Update `docs/ARCHITECTURE.md` or `README.md` with design changes.
+- [ ] Keep commits small and focused.
 Pull request checklist
+- [ ] Add/update tests for new behavior.
+- [ ] Update `docs/ARCHITECTURE.md` or `README.md` with design changes.
+- [ ] Keep commits small and focused.
 - [ ] Add/update tests for new behavior.
 - [ ] Update `docs/ARCHITECTURE.md` or `README.md` with design changes.
 - [ ] Keep commits small and focused.
