@@ -27,13 +27,13 @@ public sealed class OllamaService : IInferenceProvider<OllamaProviderOptions>
 
     public async ValueTask<Fin> StartAsync(CancellationToken cancellationToken)
     {
-        var result = await _commands.RunAsync("sudo", ["systemctl", "start", "ollama"], null, TimeSpan.FromSeconds(30), cancellationToken);
+        var result = await _commands.RunAsync("systemctl", ["--user", "start", "ollama"], null, TimeSpan.FromSeconds(30), cancellationToken);
         return result.Succeeded ? Fin.Succ() : Fin.Fail(AiStackError.ExternalTool(result.StandardError));
     }
 
     public async ValueTask<Fin> StopAsync(CancellationToken cancellationToken)
     {
-        var result = await _commands.RunAsync("sudo", ["systemctl", "stop", "ollama"], null, TimeSpan.FromSeconds(30), cancellationToken);
+        var result = await _commands.RunAsync("systemctl", ["--user", "stop", "ollama"], null, TimeSpan.FromSeconds(30), cancellationToken);
         return result.Succeeded ? Fin.Succ() : Fin.Fail(AiStackError.ExternalTool(result.StandardError));
     }
 
