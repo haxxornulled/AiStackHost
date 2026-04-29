@@ -13,6 +13,14 @@ public sealed class ProcessCommandRunner : ICommandRunner
 
     public async ValueTask<CommandResult> RunAsync(string fileName, IReadOnlyList<string> arguments, string? workingDirectory, TimeSpan timeout, CancellationToken cancellationToken)
     {
+        // Allow tests and local dev to opt into a hermetic command runner by default.
+        // Set environment variable `AISTACK_RUN_REAL_COMMANDS=true` to allow real process execution.
+        if (!string.Equals(Environment.GetEnvironmentVariable("AISTACK_RUN_REAL_COMMANDS"), "true", StringComparison.OrdinalIgnoreCase))
+        {
+            _logger.LogInformation("Simulating command (hermetic mode): {Command}", $"{fileName} {string.Join(' ', arguments)}");
+            return new CommandResult(fileName, arguments, workingDirectory, 0, "", "(simulated)", TimeSpan.Zero);
+        }
+
         var started = Stopwatch.GetTimestamp();
         var stdout = new StringBuilder();
         var stderr = new StringBuilder();

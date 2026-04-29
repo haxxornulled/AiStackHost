@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AiStackManager.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+48672dad8a71c62c2feb39645bd0a92a3968933f")]
 [assembly: System.Reflection.AssemblyProductAttribute("AiStackManager.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AiStackManager.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

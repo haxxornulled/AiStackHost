@@ -9,3 +9,4 @@
 /home/jarceri/src/AiStackHost/src/AiStackManager.Domain/obj/Release/net10.0/refint/AiStackManager.Domain.dll
 /home/jarceri/src/AiStackHost/src/AiStackManager.Domain/obj/Release/net10.0/AiStackManager.Domain.pdb
 /home/jarceri/src/AiStackHost/src/AiStackManager.Domain/obj/Release/net10.0/ref/AiStackManager.Domain.dll
+/home/jarceri/src/AiStackHost/src/AiStackManager.Domain/obj/Release/net10.0/AiStackManager.Domain.sourcelink.json

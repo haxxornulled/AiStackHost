@@ -15,3 +15,4 @@
 /home/jarceri/src/AiStackHost/src/AiStackManager.Infrastructure/obj/Release/net10.0/refint/AiStackManager.Infrastructure.dll
 /home/jarceri/src/AiStackHost/src/AiStackManager.Infrastructure/obj/Release/net10.0/AiStackManager.Infrastructure.pdb
 /home/jarceri/src/AiStackHost/src/AiStackManager.Infrastructure/obj/Release/net10.0/ref/AiStackManager.Infrastructure.dll
+/home/jarceri/src/AiStackHost/src/AiStackManager.Infrastructure/obj/Release/net10.0/AiStackManager.Infrastructure.sourcelink.json
