@@ -11,20 +11,13 @@ command -v ollama >/dev/null || { echo "ollama missing" >&2; exit 1; }
 command -v hermes >/dev/null || { echo "hermes missing" >&2; exit 1; }
 command -v openclaw >/dev/null || { echo "openclaw missing" >&2; exit 1; }
 
-if ! ollama list >/tmp/aistack-ollama-list.$$ 2>/tmp/aistack-ollama-error.$$; then
-  if [ "${AISTACK_RUN_REAL_COMMANDS:-false}" = "true" ]; then
-    echo "Ollama is not reachable; attempting to start user service."
-    systemctl --user start ollama || true
-    sleep 1
-    ollama list >/tmp/aistack-ollama-list.$$ 2>/tmp/aistack-ollama-error.$$ || true
-  fi
-fi
+ollama_list=$(mktemp)
+ollama_error=$(mktemp)
+trap 'rm -f "$ollama_list" "$ollama_error"' EXIT
 
-if [ -s /tmp/aistack-ollama-list.$$ ]; then
-  grep -F "$AI_MODEL" /tmp/aistack-ollama-list.$$ || echo "Model not found; create/pull it before starting the .NET host."
+if ollama list >"$ollama_list" 2>"$ollama_error"; then
+  grep -F "$AI_MODEL" "$ollama_list" || echo "Model not found; the .NET host will attempt to pull it during startup."
 else
-  cat /tmp/aistack-ollama-error.$$ >&2 || true
-  echo "Ollama is not reachable yet; the .NET host will attempt to start it."
+  cat "$ollama_error" >&2 || true
+  echo "Ollama is not reachable yet; the .NET host owns runtime startup."
 fi
-
-rm -f /tmp/aistack-ollama-list.$$ /tmp/aistack-ollama-error.$$

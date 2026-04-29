@@ -65,8 +65,11 @@ public sealed class AiStackOrchestrator
 
             _logger.LogInformation("Starting AI stack with model {ProviderId}/{ModelId}", selection.ProviderId, selection.ModelId);
 
-            var runtimeStart = await provider.Value.StartAsync(cancellationToken);
-            if (runtimeStart.IsFail) stack.Fail(selection.ProviderId, runtimeStart.Error.Message); else stack.Get(selection.ProviderId).MarkRunning("Inference provider started.");
+            if (settings.OwnInferenceRuntime)
+            {
+                var runtimeStart = await provider.Value.StartAsync(cancellationToken);
+                if (runtimeStart.IsFail) stack.Fail(selection.ProviderId, runtimeStart.Error.Message); else stack.Get(selection.ProviderId).MarkRunning("Inference provider started.");
+            }
 
             var ensureModel = await provider.Value.EnsureModelAsync(selection.ModelId, cancellationToken);
             if (ensureModel.IsFail) stack.Fail(selection.ProviderId, ensureModel.Error.Message);

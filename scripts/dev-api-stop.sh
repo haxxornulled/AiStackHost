@@ -48,19 +48,17 @@ if [ -n "$pids" ]; then
   sleep 0.5
 fi
 
-# Fallback: kill any process listening on port 5126 or 5000
-for port in 5126 5000; do
-  sockpid=$(lsof -ti tcp:$port || true)
+# Fallback: kill any process listening on the locked dev API port.
+sockpid=$(lsof -ti tcp:5126 || true)
+if [ -n "$sockpid" ]; then
+  echo "Killing process listening on port 5126: $sockpid"
+  echo "$sockpid" | xargs -r kill || true
+  sleep 0.5
+  sockpid=$(lsof -ti tcp:5126 || true)
   if [ -n "$sockpid" ]; then
-    echo "Killing process listening on port $port: $sockpid"
-    echo "$sockpid" | xargs -r kill || true
-    sleep 0.5
-    sockpid=$(lsof -ti tcp:$port || true)
-    if [ -n "$sockpid" ]; then
-      echo "Process on port $port did not stop; forcing termination: $sockpid"
-      echo "$sockpid" | xargs -r kill -9 || true
-    fi
+    echo "Process on port 5126 did not stop; forcing termination: $sockpid"
+    echo "$sockpid" | xargs -r kill -9 || true
   fi
-done
+fi
 
 echo "Stop complete."
