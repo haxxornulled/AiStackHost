@@ -34,7 +34,6 @@ echo "Running bootstrap script (real commands)"
 bash scripts/bootstrap-ai-stack.sh
 
 echo "Calling management start endpoint"
-sleep 1
 if [ -n "$TOKEN" ]; then
   curl -v -X POST http://127.0.0.1:5126/api/stack/start -H "X-AiStack-Token: $TOKEN" -w "\nHTTPSTATUS:%{http_code}\n"
 elif [ -n "${AISTACK_MANAGEMENT_TOKEN:-}" ]; then

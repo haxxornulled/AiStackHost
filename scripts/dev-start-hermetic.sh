@@ -13,5 +13,4 @@ echo "Running bootstrap (hermetic checks)"
 bash scripts/bootstrap-ai-stack.sh
 
 echo "Posting start request to management endpoint"
-sleep 1
 curl -v -X POST http://127.0.0.1:5126/api/stack/start -w "\nHTTPSTATUS:%{http_code}\n"

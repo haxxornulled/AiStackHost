@@ -16,18 +16,22 @@ public sealed class AiStackHealthBackgroundService : BackgroundService
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         using var timer = new PeriodicTimer(TimeSpan.FromSeconds(30));
-        while (await timer.WaitForNextTickAsync(stoppingToken))
+        try
         {
-            try
+            while (await timer.WaitForNextTickAsync(stoppingToken))
             {
-                var snapshot = await _health.SnapshotAsync(stoppingToken);
-                _logger.LogDebug("AI stack health snapshot: {@Snapshot}", snapshot);
-            }
-            catch (OperationCanceledException) when (stoppingToken.IsCancellationRequested) { }
-            catch (Exception ex)
-            {
-                _logger.LogWarning(ex, "Health snapshot failed.");
+                try
+                {
+                    var snapshot = await _health.SnapshotAsync(stoppingToken);
+                    _logger.LogDebug("AI stack health snapshot: {@Snapshot}", snapshot);
+                }
+                catch (OperationCanceledException) when (stoppingToken.IsCancellationRequested) { }
+                catch (Exception ex)
+                {
+                    _logger.LogWarning(ex, "Health snapshot failed.");
+                }
             }
         }
+        catch (OperationCanceledException) when (stoppingToken.IsCancellationRequested) { }
     }
 }
