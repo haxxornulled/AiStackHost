@@ -1,0 +1,15 @@
+/home/jarceri/src/AiStackHost/src/AiStackManager.Application/bin/Release/net10.0/AiStackManager.Application.deps.json
+/home/jarceri/src/AiStackHost/src/AiStackManager.Application/bin/Release/net10.0/AiStackManager.Application.dll
+/home/jarceri/src/AiStackHost/src/AiStackManager.Application/bin/Release/net10.0/AiStackManager.Application.pdb
+/home/jarceri/src/AiStackHost/src/AiStackManager.Application/bin/Release/net10.0/AiStackManager.Domain.dll
+/home/jarceri/src/AiStackHost/src/AiStackManager.Application/bin/Release/net10.0/AiStackManager.Domain.pdb
+/home/jarceri/src/AiStackHost/src/AiStackManager.Application/obj/Release/net10.0/AiStackManager.Application.csproj.AssemblyReference.cache
+/home/jarceri/src/AiStackHost/src/AiStackManager.Application/obj/Release/net10.0/AiStackManager.Application.GeneratedMSBuildEditorConfig.editorconfig
+/home/jarceri/src/AiStackHost/src/AiStackManager.Application/obj/Release/net10.0/AiStackManager.Application.AssemblyInfoInputs.cache
+/home/jarceri/src/AiStackHost/src/AiStackManager.Application/obj/Release/net10.0/AiStackManager.Application.AssemblyInfo.cs
+/home/jarceri/src/AiStackHost/src/AiStackManager.Application/obj/Release/net10.0/AiStackManager.Application.csproj.CoreCompileInputs.cache
+/home/jarceri/src/AiStackHost/src/AiStackManager.Application/obj/Release/net10.0/AiStackM.0ACC82DE.Up2Date
+/home/jarceri/src/AiStackHost/src/AiStackManager.Application/obj/Release/net10.0/AiStackManager.Application.dll
+/home/jarceri/src/AiStackHost/src/AiStackManager.Application/obj/Release/net10.0/refint/AiStackManager.Application.dll
+/home/jarceri/src/AiStackHost/src/AiStackManager.Application/obj/Release/net10.0/AiStackManager.Application.pdb
+/home/jarceri/src/AiStackHost/src/AiStackManager.Application/obj/Release/net10.0/ref/AiStackManager.Application.dll

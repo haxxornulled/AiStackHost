@@ -1,0 +1,6 @@
+{
+  "AiStackManager.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/jarceri\/src\/AiStackHost\/src\/AiStackManager.Api",
+  "AiStackManager.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/jarceri\/src\/AiStackHost\/src\/AiStackManager.Application",
+  "AiStackManager.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/jarceri\/src\/AiStackHost\/src\/AiStackManager.Domain",
+  "AiStackManager.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/home\/jarceri\/src\/AiStackHost\/src\/AiStackManager.Infrastructure"
+}

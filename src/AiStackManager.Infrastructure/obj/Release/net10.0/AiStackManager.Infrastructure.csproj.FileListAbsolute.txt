@@ -1,0 +1,17 @@
+/home/jarceri/src/AiStackHost/src/AiStackManager.Infrastructure/obj/Release/net10.0/AiStackManager.Infrastructure.csproj.AssemblyReference.cache
+/home/jarceri/src/AiStackHost/src/AiStackManager.Infrastructure/obj/Release/net10.0/AiStackManager.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+/home/jarceri/src/AiStackHost/src/AiStackManager.Infrastructure/obj/Release/net10.0/AiStackManager.Infrastructure.AssemblyInfoInputs.cache
+/home/jarceri/src/AiStackHost/src/AiStackManager.Infrastructure/obj/Release/net10.0/AiStackManager.Infrastructure.AssemblyInfo.cs
+/home/jarceri/src/AiStackHost/src/AiStackManager.Infrastructure/obj/Release/net10.0/AiStackManager.Infrastructure.csproj.CoreCompileInputs.cache
+/home/jarceri/src/AiStackHost/src/AiStackManager.Infrastructure/bin/Release/net10.0/AiStackManager.Infrastructure.deps.json
+/home/jarceri/src/AiStackHost/src/AiStackManager.Infrastructure/bin/Release/net10.0/AiStackManager.Infrastructure.dll
+/home/jarceri/src/AiStackHost/src/AiStackManager.Infrastructure/bin/Release/net10.0/AiStackManager.Infrastructure.pdb
+/home/jarceri/src/AiStackHost/src/AiStackManager.Infrastructure/bin/Release/net10.0/AiStackManager.Application.dll
+/home/jarceri/src/AiStackHost/src/AiStackManager.Infrastructure/bin/Release/net10.0/AiStackManager.Domain.dll
+/home/jarceri/src/AiStackHost/src/AiStackManager.Infrastructure/bin/Release/net10.0/AiStackManager.Application.pdb
+/home/jarceri/src/AiStackHost/src/AiStackManager.Infrastructure/bin/Release/net10.0/AiStackManager.Domain.pdb
+/home/jarceri/src/AiStackHost/src/AiStackManager.Infrastructure/obj/Release/net10.0/AiStackM.F9A1BCD5.Up2Date
+/home/jarceri/src/AiStackHost/src/AiStackManager.Infrastructure/obj/Release/net10.0/AiStackManager.Infrastructure.dll
+/home/jarceri/src/AiStackHost/src/AiStackManager.Infrastructure/obj/Release/net10.0/refint/AiStackManager.Infrastructure.dll
+/home/jarceri/src/AiStackHost/src/AiStackManager.Infrastructure/obj/Release/net10.0/AiStackManager.Infrastructure.pdb
+/home/jarceri/src/AiStackHost/src/AiStackManager.Infrastructure/obj/Release/net10.0/ref/AiStackManager.Infrastructure.dll

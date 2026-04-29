@@ -1,0 +1,11 @@
+/home/jarceri/src/AiStackHost/src/AiStackManager.Domain/bin/Debug/net10.0/AiStackManager.Domain.deps.json
+/home/jarceri/src/AiStackHost/src/AiStackManager.Domain/bin/Debug/net10.0/AiStackManager.Domain.dll
+/home/jarceri/src/AiStackHost/src/AiStackManager.Domain/bin/Debug/net10.0/AiStackManager.Domain.pdb
+/home/jarceri/src/AiStackHost/src/AiStackManager.Domain/obj/Debug/net10.0/AiStackManager.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/home/jarceri/src/AiStackHost/src/AiStackManager.Domain/obj/Debug/net10.0/AiStackManager.Domain.AssemblyInfoInputs.cache
+/home/jarceri/src/AiStackHost/src/AiStackManager.Domain/obj/Debug/net10.0/AiStackManager.Domain.AssemblyInfo.cs
+/home/jarceri/src/AiStackHost/src/AiStackManager.Domain/obj/Debug/net10.0/AiStackManager.Domain.csproj.CoreCompileInputs.cache
+/home/jarceri/src/AiStackHost/src/AiStackManager.Domain/obj/Debug/net10.0/AiStackManager.Domain.dll
+/home/jarceri/src/AiStackHost/src/AiStackManager.Domain/obj/Debug/net10.0/refint/AiStackManager.Domain.dll
+/home/jarceri/src/AiStackHost/src/AiStackManager.Domain/obj/Debug/net10.0/AiStackManager.Domain.pdb
+/home/jarceri/src/AiStackHost/src/AiStackManager.Domain/obj/Debug/net10.0/ref/AiStackManager.Domain.dll

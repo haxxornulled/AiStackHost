@@ -1,0 +1,565 @@
+{
+  "info": {
+    "name": "AI Stack Manager",
+    "description": "Postman collection for the local AI Stack Manager API. Set baseUrl to the running API, and set managementToken if AiStack:ManagementToken is configured.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:5126",
+      "type": "string"
+    },
+    {
+      "key": "managementToken",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "repositoryPath",
+      "value": "/home/jarceri/src/AiStackHost",
+      "type": "string"
+    },
+    {
+      "key": "providerId",
+      "value": "ollama",
+      "type": "string"
+    },
+    {
+      "key": "modelId",
+      "value": "qwen25-coder-14b-64k",
+      "type": "string"
+    },
+    {
+      "key": "baseBranch",
+      "value": "origin/main",
+      "type": "string"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{managementToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "GET /health",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "health"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Stack",
+      "item": [
+        {
+          "name": "GET /api/stack/status",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-AiStack-Token",
+                "value": "{{managementToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/stack/status",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "stack",
+                "status"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /api/stack/start",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-AiStack-Token",
+                "value": "{{managementToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/stack/start",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "stack",
+                "start"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /api/stack/stop",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-AiStack-Token",
+                "value": "{{managementToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/stack/stop",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "stack",
+                "stop"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /api/stack/restart",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-AiStack-Token",
+                "value": "{{managementToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/stack/restart",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "stack",
+                "restart"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Models",
+      "item": [
+        {
+          "name": "GET /api/models/providers",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-AiStack-Token",
+                "value": "{{managementToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/models/providers",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "models",
+                "providers"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /api/models",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-AiStack-Token",
+                "value": "{{managementToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/models?provider={{providerId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "models"
+              ],
+              "query": [
+                {
+                  "key": "provider",
+                  "value": "{{providerId}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /api/models/current",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-AiStack-Token",
+                "value": "{{managementToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/models/current",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "models",
+                "current"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /api/models/select",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "X-AiStack-Token",
+                "value": "{{managementToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"providerId\": \"{{providerId}}\",\n  \"modelId\": \"{{modelId}}\",\n  \"downloadIfMissing\": false\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/models/select",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "models",
+                "select"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /api/models/download",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "X-AiStack-Token",
+                "value": "{{managementToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"providerId\": \"{{providerId}}\",\n  \"modelId\": \"{{modelId}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/models/download",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "models",
+                "download"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Review",
+      "item": [
+        {
+          "name": "POST /api/review/pre-push",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "X-AiStack-Token",
+                "value": "{{managementToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"repositoryPath\": \"{{repositoryPath}}\",\n  \"baseBranch\": \"{{baseBranch}}\",\n  \"runRestore\": true,\n  \"runBuild\": true,\n  \"runTests\": true,\n  \"allowEdits\": false\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/review/pre-push",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "review",
+                "pre-push"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /api/hermes/smoke-test",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "X-AiStack-Token",
+                "value": "{{managementToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"repositoryPath\": \"{{repositoryPath}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/hermes/smoke-test",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "hermes",
+                "smoke-test"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Commands",
+      "item": [
+        {
+          "name": "POST /api/commands/run-safe-status - git status",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "X-AiStack-Token",
+                "value": "{{managementToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"command\": \"git\",\n  \"arguments\": [\"status\", \"--short\"],\n  \"workingDirectory\": \"{{repositoryPath}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/commands/run-safe-status",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "commands",
+                "run-safe-status"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /api/commands/run-safe-status - dotnet info",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "X-AiStack-Token",
+                "value": "{{managementToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"command\": \"dotnet\",\n  \"arguments\": [\"--info\"],\n  \"workingDirectory\": \"{{repositoryPath}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/commands/run-safe-status",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "commands",
+                "run-safe-status"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /api/commands/run-safe-status - ollama ps",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "X-AiStack-Token",
+                "value": "{{managementToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"command\": \"ollama\",\n  \"arguments\": [\"ps\"],\n  \"workingDirectory\": \"{{repositoryPath}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/commands/run-safe-status",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "commands",
+                "run-safe-status"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /api/commands/run-safe-status - openclaw models status",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "X-AiStack-Token",
+                "value": "{{managementToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"command\": \"openclaw\",\n  \"arguments\": [\"models\", \"status\"],\n  \"workingDirectory\": \"{{repositoryPath}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/commands/run-safe-status",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "commands",
+                "run-safe-status"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /api/commands/run-safe-status - hermes version",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "X-AiStack-Token",
+                "value": "{{managementToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"command\": \"hermes\",\n  \"arguments\": [\"--version\"],\n  \"workingDirectory\": \"{{repositoryPath}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/commands/run-safe-status",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "commands",
+                "run-safe-status"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

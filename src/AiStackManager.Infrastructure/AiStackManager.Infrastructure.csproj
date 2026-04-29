@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><TargetFramework>net10.0</TargetFramework><Nullable>enable</Nullable><ImplicitUsings>enable</ImplicitUsings><LangVersion>preview</LangVersion></PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AiStackManager.Application\AiStackManager.Application.csproj" />
+    <ProjectReference Include="..\AiStackManager.Domain\AiStackManager.Domain.csproj" />
+  </ItemGroup>
+  <ItemGroup><PackageReference Include="Microsoft.Extensions.Http" Version="10.0.7" /></ItemGroup>
+</Project>

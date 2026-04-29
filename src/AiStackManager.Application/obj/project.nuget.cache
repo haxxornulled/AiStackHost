@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "DRmA0YtWTGY=",
+  "success": true,
+  "projectFilePath": "/home/jarceri/src/AiStackHost/src/AiStackManager.Application/AiStackManager.Application.csproj",
+  "expectedPackageFiles": [
+    "/home/jarceri/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/10.0.7/microsoft.extensions.dependencyinjection.abstractions.10.0.7.nupkg.sha512",
+    "/home/jarceri/.nuget/packages/microsoft.extensions.logging.abstractions/10.0.7/microsoft.extensions.logging.abstractions.10.0.7.nupkg.sha512",
+    "/home/jarceri/.nuget/packages/microsoft.extensions.options/10.0.7/microsoft.extensions.options.10.0.7.nupkg.sha512",
+    "/home/jarceri/.nuget/packages/microsoft.extensions.primitives/10.0.7/microsoft.extensions.primitives.10.0.7.nupkg.sha512"
+  ],
+  "logs": []
+}
