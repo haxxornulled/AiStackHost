@@ -27,14 +27,24 @@ public sealed class OllamaService : IInferenceProvider<OllamaProviderOptions>
 
     public async ValueTask<Fin> StartAsync(CancellationToken cancellationToken)
     {
-        var result = await _commands.RunAsync("systemctl", ["--user", "start", "ollama"], null, TimeSpan.FromSeconds(30), cancellationToken);
-        return result.Succeeded ? Fin.Succ() : Fin.Fail(AiStackError.ExternalTool(result.StandardError));
+        var result = await _commands.RunAsync("systemctl", ["--user", "start", "ollama.service"], null, TimeSpan.FromSeconds(30), cancellationToken);
+        if (!result.Succeeded && !IsMissingUserService(result))
+            return Fin.Fail(AiStackError.ExternalTool(result.StandardError));
+
+        if (IsMissingUserService(result))
+        {
+            _logger.LogInformation("Ollama user service is missing; creating a managed user service.");
+            var install = await _commands.RunAsync("bash", ["-lc", InstallUserServiceScript], null, TimeSpan.FromSeconds(30), cancellationToken);
+            if (!install.Succeeded) return Fin.Fail(AiStackError.ExternalTool(install.StandardError));
+        }
+
+        return await WaitUntilReadyAsync(cancellationToken);
     }
 
     public async ValueTask<Fin> StopAsync(CancellationToken cancellationToken)
     {
-        var result = await _commands.RunAsync("systemctl", ["--user", "stop", "ollama"], null, TimeSpan.FromSeconds(30), cancellationToken);
-        return result.Succeeded ? Fin.Succ() : Fin.Fail(AiStackError.ExternalTool(result.StandardError));
+        var result = await _commands.RunAsync("systemctl", ["--user", "stop", "ollama.service"], null, TimeSpan.FromSeconds(30), cancellationToken);
+        return result.Succeeded || IsMissingUserService(result) ? Fin.Succ() : Fin.Fail(AiStackError.ExternalTool(result.StandardError));
     }
 
     public async ValueTask<IReadOnlyList<InferenceModelDescriptor>> ListModelsAsync(CancellationToken cancellationToken)
@@ -61,7 +71,7 @@ public sealed class OllamaService : IInferenceProvider<OllamaProviderOptions>
     public async ValueTask<Fin> EnsureModelAsync(string modelId, CancellationToken cancellationToken)
     {
         var models = await ListModelsAsync(cancellationToken);
-        if (models.Any(m => string.Equals(m.Id, modelId, StringComparison.OrdinalIgnoreCase))) return Fin.Succ();
+        if (models.Any(m => ModelIdsMatch(m.Id, modelId))) return Fin.Succ();
 
         return await DownloadModelAsync(modelId, cancellationToken);
     }
@@ -92,4 +102,51 @@ public sealed class OllamaService : IInferenceProvider<OllamaProviderOptions>
             SizeBytes: null,
             Details: size);
     }
+
+    private async ValueTask<Fin> WaitUntilReadyAsync(CancellationToken cancellationToken)
+    {
+        CommandResult? last = null;
+        for (var attempt = 0; attempt < 20; attempt++)
+        {
+            last = await _commands.RunAsync("ollama", ["ps"], null, TimeSpan.FromSeconds(5), cancellationToken);
+            if (last.Succeeded) return Fin.Succ();
+
+            await Task.Delay(TimeSpan.FromMilliseconds(500), cancellationToken);
+        }
+
+        return Fin.Fail(AiStackError.ExternalTool(last?.StandardError ?? "Ollama did not become ready."));
+    }
+
+    private static bool IsMissingUserService(CommandResult result)
+        => result.StandardError.Contains("Unit ollama.service not found", StringComparison.OrdinalIgnoreCase) ||
+           result.StandardError.Contains("Unit ollama.service could not be found", StringComparison.OrdinalIgnoreCase);
+
+    private static bool ModelIdsMatch(string actual, string expected)
+        => string.Equals(actual, expected, StringComparison.OrdinalIgnoreCase) ||
+           string.Equals(actual, $"{expected}:latest", StringComparison.OrdinalIgnoreCase) ||
+           string.Equals($"{actual}:latest", expected, StringComparison.OrdinalIgnoreCase);
+
+    private const string InstallUserServiceScript = """
+        set -euo pipefail
+        ollama_path="$(command -v ollama)"
+        service_dir="$HOME/.config/systemd/user"
+        service_file="$service_dir/ollama.service"
+        mkdir -p "$service_dir"
+        cat > "$service_file" <<EOF
+        [Unit]
+        Description=Ollama local model runtime
+        After=network-online.target
+
+        [Service]
+        ExecStart=$ollama_path serve
+        Restart=on-failure
+        RestartSec=3
+        Environment=OLLAMA_HOST=127.0.0.1:11434
+
+        [Install]
+        WantedBy=default.target
+        EOF
+        systemctl --user daemon-reload
+        systemctl --user enable --now ollama.service
+        """;
 }

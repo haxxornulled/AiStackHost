@@ -6,18 +6,24 @@ cd "$SCRIPT_DIR/.."
 URL="http://127.0.0.1:5126"
 LOGFILE=".dev_api.log"
 PIDFILE=".dev_api.pid"
+PROJECT="src/AiStackManager.Api/AiStackManager.Api.csproj"
+APP_DLL="src/AiStackManager.Api/bin/Release/net10.0/AiStackManager.Api.dll"
 
 ./scripts/dev-api-stop.sh || true
 
+echo "Building API project"
+dotnet build "$PROJECT" -c Release --nologo >/dev/null
+
 echo "Starting API ($URL)"
 rm -f "$LOGFILE"
-dotnet run --project src/AiStackManager.Api/AiStackManager.Api.csproj -- --urls "$URL" >"$LOGFILE" 2>&1 &
+setsid dotnet "$APP_DLL" --urls "$URL" >"$LOGFILE" 2>&1 < /dev/null &
 echo $! > "$PIDFILE"
 echo "API process started with PID $(cat "$PIDFILE")"
 
 for _ in {1..80}; do
   if curl -fsS "$URL/health" >/dev/null 2>&1; then
     echo "API is ready at $URL"
+    disown "$(cat "$PIDFILE")" 2>/dev/null || true
     exit 0
   fi
 

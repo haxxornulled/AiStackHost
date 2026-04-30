@@ -15,7 +15,7 @@ stop_pid() {
 
 wait_for_exit() {
   local pid="$1"
-  for _ in {1..20}; do
+  for _ in {1..100}; do
     if ! kill -0 "$pid" 2>/dev/null; then
       return 0
     fi
